@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+  <head>
+    <title>Tic tac toe</title>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+     <link href="style.css" rel="stylesheet" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  </head>
+  <body class="col-12">
+    <header class='text-center mt-2'>
+      <h1 class="mb-0">Tic Tac Toe</h1>
+<!--      <h3 class="mt-0">Lets play the game!!!</h3>-->
+      <div id="winner">
+        <span>Current Player: ( </span>
+        <span id="current-player"> </span>
+      </div>
+    </header>
+    
+    <div class="text-center" id="choose-player">
+      <span>Select Player: </span>
+      <button class="xplayer btn btn-sm btn-success px-3">X</button>
+    </div>
+    <div class="text-center mt-1">
+      <span>Select Board: </span>
+      <button class="select-three btn btn-sm btn-success px-3" data-value="3">3*3</button>
+      <button class="select-nine btn btn-sm btn-info px-3" data-value="9">9*9</button>
+    </div>
+    <section class="mt-1" id="selected-board" data-value="">
+<!--      <div class="row d-flex justify-content-center"></div>-->
+<!--      <div class="row d-flex justify-content-center">-->
+<!--        <div class="col-md-3 cell" data-value="21" ></div>-->
+<!--        <div class="col-md-3 cell" data-value="22" ></div>-->
+<!--        <div class="col-md-3 cell" data-value="23" ></div>-->
+<!--      </div>-->
+<!--      <div class="row d-flex justify-content-center">-->
+<!--        <div class="col-md-3 cell" data-value="31" ></div>-->
+<!--        <div class="col-md-3 cell" data-value="32" ></div>-->
+<!--        <div class="col-md-3 cell" data-value="33" ></div>-->
+<!--      </div>-->
+      <!-- <button class="reset mt-2 btn btn-danger col-2 offset-5">Reset</button> -->
+    </section>
+
+  </body>
+  <script src="script.js"></script>
+</html>

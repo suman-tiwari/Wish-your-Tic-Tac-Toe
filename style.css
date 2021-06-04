@@ -1,0 +1,15 @@
+.cell{
+    background-color: lightblue;
+    border: 1px solid black;
+    width: 90px;
+    display: inline-block;
+    height: 50px;
+    overflow: hidden;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+.margin20{
+    margin-top: 20px;
+}
