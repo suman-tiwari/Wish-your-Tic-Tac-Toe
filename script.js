@@ -86,7 +86,6 @@ function setPlayer() {
 function checkWinner(boxValuesArray){
     let uniqValuesArray = [...new Set(boxValuesArray)];
     if(uniqValuesArray.length == 1 && uniqValuesArray[0] !=""){
-        debugger
         winner = uniqValuesArray[0];
         displayAlert("Winner is: " + winner);
     }
@@ -146,12 +145,10 @@ function checkDiagonal(dataValue) {
         // checkWinner(getBoxValue('11'), getBoxValue('22'), getBoxValue('33'))
     } else {
         let boxValuesArray = [];
-        for(let k=boardLength; k>=1; k--){
-            for(let j=1; j<=boardLength; j++){
-                debugger
-                boxValuesArray.push(getBoxValue(j.toString()+k));
-                break;
-            }
+        var SecondaryDiagonalBoxSum = parseInt(boardLength) + 1;
+        for(let k=1; k<=boardLength; k++){
+            let lastIndex = SecondaryDiagonalBoxSum - k;
+            boxValuesArray.push(getBoxValue(k.toString()+ lastIndex));
         }
         checkWinner(boxValuesArray)
         // checkWinner(getBoxValue('13'), getBoxValue('22'), getBoxValue('31'))
