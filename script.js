@@ -1,7 +1,9 @@
 // Generate the board
-$('.select-nine, .select-three').one('click', function(){
-    $(this).parent().hide();
-    boardLength = this.getAttribute('data-value');
+$('form').on('submit', function(event){
+    $(this).hide();
+    boardLength = $('.board-length').val();
+    event.preventDefault();
+    $('h1').prepend(boardLength+ "X" + boardLength)
     for (var i=1; i <= boardLength; i++){
         $('#selected-board').append('<div class="row d-flex justify-content-center" id=' + "row" + i + ' data-value=' + boardLength + '></div>');
         for(var j=1; j <=boardLength; j++){
