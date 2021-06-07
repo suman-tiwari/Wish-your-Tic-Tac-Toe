@@ -13,7 +13,7 @@ $('form').on('submit', function(event){
         // }
         $('#selected-board').append('<tr class="" style="height: 50px; " id=' + "row" + i + ' data-value=' + boardLength + '></tr>');
         for(var j=1; j <=boardLength; j++){
-            $('#row'+i).append('<td class="cell cell-styles text-center" data-value='+ i+j+' ></td>')
+            $('#row'+i).append('<td class="cell cell-styles" data-value='+ i+j+' ></td>')
         }
     }
 });
