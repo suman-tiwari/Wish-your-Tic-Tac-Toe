@@ -5,7 +5,7 @@ $('.select-nine, .select-three').one('click', function(){
     for (var i=1; i <= boardLength; i++){
         $('#selected-board').append('<div class="row d-flex justify-content-center" id=' + "row" + i + ' data-value=' + boardLength + '></div>');
         for(var j=1; j <=boardLength; j++){
-            $('#row'+i).append('<div class="col-3 cell" data-value='+ i+j+' ></div>')
+            $('#row'+i).append('<div class="col-3 cell cell-styles" data-value='+ i+j+' ></div>')
         }
     }
 });
@@ -26,6 +26,7 @@ function setClickEventForBoxes(){
     $('#choose-player').addClass('d-none');
     cell = event.target;
     cell.innerText = player;
+    cell.classList.remove('cell')
 
     clickCount += 1;
     setPlayer();
