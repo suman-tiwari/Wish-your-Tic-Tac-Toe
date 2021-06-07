@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   </head>
-  <body class="col-12">
+  <body>
     <header class='text-center mt-2'>
       <h1 class="mb-0"> Tic Tac Toe</h1>
      <!-- <h3 class="mt-0">Let's Start playing!!!</h3> -->
@@ -30,7 +30,9 @@
     </div>
 
     <!-- board display section -->
-    <section class="mt-1" id="selected-board" data-value=""></section>
+    <section class="mt-1 d-flex justify-content-center" style="width: 100%; overflow-x: scroll;">
+      <table id="selected-board"></table>
+    </section>
 
   </body>
   <script src="script.js"></script>

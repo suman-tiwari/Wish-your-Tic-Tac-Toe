@@ -1,13 +1,19 @@
 // Generate the board
 $('form').on('submit', function(event){
-    $(this).hide();
     boardLength = $('.board-length').val();
+    $(this).hide();
+    var widthHeight = parseInt(100/boardLength);
     event.preventDefault();
     $('h1').prepend(boardLength+ "X" + boardLength)
     for (var i=1; i <= boardLength; i++){
-        $('#selected-board').append('<div class="row d-flex justify-content-center" id=' + "row" + i + ' data-value=' + boardLength + '></div>');
+
+        // $('#selected-board').append('<div class="" style="height:' + heightSize + '; " id=' + "row" + i + ' data-value=' + boardLength + '></div>');
+        // for(var j=1; j <=boardLength; j++){
+        //     $('#row'+i).append('<span class="cell cell-styles" style="font-size: ' + fontSize + '; width:' + widthSize + '; height: '+ heightSize + '; " data-value='+ i+j+' ></span>')
+        // }
+        $('#selected-board').append('<tr class="" style="height: 50px; " id=' + "row" + i + ' data-value=' + boardLength + '></tr>');
         for(var j=1; j <=boardLength; j++){
-            $('#row'+i).append('<div class="col-3 cell cell-styles" data-value='+ i+j+' ></div>')
+            $('#row'+i).append('<td class="cell cell-styles text-center" data-value='+ i+j+' ></td>')
         }
     }
 });
@@ -31,7 +37,6 @@ function setClickEventForBoxes(cell){
 
     clickCount += 1;
     setPlayer();
-
     // if number of clicks is 5 or more then only check the winner
     setTimeout(function () {
         if (clickCount >= ((boardLength * 2) - 1)) {
@@ -109,20 +114,29 @@ function getBoxValue(dataVal){
 }
 // check row
 function checkRow(dataValue) {
-    let firstIndex = dataValue.split('')[0];
-    checkWinnerForRowColumn("row", firstIndex)
+    checkWinnerForRowColumn("row", getFirstIndexOfCell(dataValue));
 }
 
 // check column
 function checkColumn(dataValue) {
-    let lastIndex = dataValue.split('')[1];
-    checkWinnerForRowColumn('column', lastIndex)
+    checkWinnerForRowColumn('column', getLastIndexOfCell(dataValue));
 }
 
+// get first index of the current cell
+function getFirstIndexOfCell(dataValue){
+    let dataValueLength = dataValue.length
+    return dataValue.slice(0, dataValueLength/2);
+}
+// get last index of the current cell
+function getLastIndexOfCell(dataValue){
+    let dataValueLength = dataValue.length
+    return dataValue.slice(dataValueLength/2);
+}
 // check diagonal
 function checkDiagonal(dataValue) {
-    let i = dataValue.split('')[0];
-    let j = dataValue.split('')[1];
+
+    let i = getFirstIndexOfCell(dataValue);
+    let j = getLastIndexOfCell(dataValue);
 
     if (i === j) {
         checkWinnerForDiagonal('primary-diagonal')
