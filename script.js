@@ -11,7 +11,7 @@ $('.select-nine, .select-three').one('click', function(){
 });
 
 $('#selected-board').on('click', '.cell', function(){
-    setClickEventForBoxes()
+    setClickEventForBoxes(this)
 });
 
 // initializeVariables();
@@ -22,9 +22,8 @@ var boardLength;
 displayCurrentPlayer();
 selectPlayer();
 
-function setClickEventForBoxes(){
+function setClickEventForBoxes(cell){
     $('#choose-player').addClass('d-none');
-    cell = event.target;
     cell.innerText = player;
     cell.classList.remove('cell')
 
@@ -35,9 +34,10 @@ function setClickEventForBoxes(){
     setTimeout(function () {
         if (clickCount >= ((boardLength * 2) - 1)) {
             checkRow(getDataAttrValue(cell));
-            // checkColumn(getDataAttrValue(cell));
-            // checkDiagonal(getDataAttrValue(cell));
+            // check column only if winner is undefined
             winner == undefined ? checkColumn(getDataAttrValue(cell)) : true;
+            
+            // check diagonal only if winner is undefined
             winner == undefined ? checkDiagonal(getDataAttrValue(cell)) : true;
         }
 
@@ -48,7 +48,7 @@ function setClickEventForBoxes(){
 
 }
 
-// append current player
+// display current player after click
 function displayCurrentPlayer() {
     $('#current-player')[0].innerText = player + " )";
 }
@@ -74,21 +74,20 @@ function setPlayer() {
     } else {
         player = 'O';
     }
-    // display current player
     displayCurrentPlayer();
 }
 
 
 
 // check winner
-// function checkWinner(a, b, c) {
+// function declareWinner(a, b, c) {
 //     if (a === b && b===c && a != null) {
 //         winner = a;
 //         displayAlert("Winner is: " + winner);
 //     }
 // }
 
-function checkWinner(boxValuesArray){
+function declareWinner(boxValuesArray){
     let uniqValuesArray = [...new Set(boxValuesArray)];
     if(uniqValuesArray.length == 1 && uniqValuesArray[0] !=""){
         winner = uniqValuesArray[0];
@@ -108,31 +107,14 @@ function getBoxValue(dataVal){
 }
 // check row
 function checkRow(dataValue) {
-    let i = dataValue.split('')[0];
-    // checkWinner(getBoxValue(i+'1'), getBoxValue(i+'2'), getBoxValue(i+'3'))
-    let boxValuesArray = [];
-    for (let j=1; j <= boardLength; j++){
-        boxValuesArray.push(getBoxValue(i+j))
-    }
-    checkWinner(boxValuesArray)
-}
-
-function createBoxValuesArray(index){
-    let boxValuesArray = [];
-    for(let k=1; k<=boardLength; k++){
-        boxValuesArray.push(getBoxValue(index.toString()+k))
-    }
-    checkWinner(boxValuesArray)
+    let firstIndex = dataValue.split('')[0];
+    checkWinnerForRowColumn("row", firstIndex)
 }
 
 // check column
 function checkColumn(dataValue) {
-    let i = dataValue.split('')[1];
-    let boxValuesArray = [];
-    for (let j=1; j<=boardLength; j++){
-        boxValuesArray.push(getBoxValue(j+i))
-    }
-    checkWinner(boxValuesArray)
+    let lastIndex = dataValue.split('')[1];
+    checkWinnerForRowColumn('column', lastIndex)
 }
 
 // check diagonal
@@ -141,18 +123,40 @@ function checkDiagonal(dataValue) {
     let j = dataValue.split('')[1];
 
     if (i === j) {
-        let boxValuesArray = [];
+        checkWinnerForDiagonal('primary-diagonal')
+    } else {
+        checkWinnerForDiagonal('secondary-diagonal')
+    }
+}
+
+
+function checkWinnerForRowColumn(checkType, index){
+    let boxValuesArray = [];
+    if(checkType=='row'){
+        for (let j=1; j <= boardLength; j++){
+            boxValuesArray.push(getBoxValue(index+j))
+        }
+    }else if(checkType=='column'){
+        for (let i=1; i<=boardLength; i++){
+            boxValuesArray.push(getBoxValue(i+index))
+        }
+    }
+    declareWinner(boxValuesArray);
+}
+
+
+function checkWinnerForDiagonal(checkType){
+    let boxValuesArray = [];
+    if(checkType == 'primary-diagonal'){
         for(let k=1; k<=boardLength; k++){
             boxValuesArray.push(getBoxValue(k.toString()+k))
         }
-        checkWinner(boxValuesArray)
-    } else {
-        let boxValuesArray = [];
+    }else if(checkType == 'secondary-diagonal'){
         var SecondaryDiagonalBoxSum = parseInt(boardLength) + 1;
         for(let k=1; k<=boardLength; k++){
             let lastIndex = SecondaryDiagonalBoxSum - k;
             boxValuesArray.push(getBoxValue(k.toString()+ lastIndex));
         }
-        checkWinner(boxValuesArray)
     }
+    declareWinner(boxValuesArray)
 }
