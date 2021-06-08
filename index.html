@@ -11,26 +11,27 @@
     <header class='text-center mt-2'>
       <h1 class="mb-0"> Tic Tac Toe</h1>
      <!-- <h3 class="mt-0">Let's Start playing!!!</h3> -->
+
+    <form class="text-center mt-1">
+      <span>Input Board Length(3-100): </span>
+      <input type="number" class="board-length" placeholder="Eg: 5" min="3", max="100" required=true>
+      <input class="btn btn-sm btn-success px-3 submitBtn" type='submit' value="Submit">
+    </form>
+
       <div id="winner">
         <span>Current Player: ( </span>
         <span id="current-player"> </span>
+        <button class="resetBtn btn btn-sm btn-outline-danger d-none p-0 px-2">Reset Board</button>
       </div>
     </header>
     
     <div class="text-center" id="choose-player">
       <span>Select Player: </span>
-      <button class="xplayer btn btn-sm btn-success px-3">X</button>
-    </div>
-    <div class="text-center mt-1">
-      <form>
-        <span>Input Board Length(3-100)** </span>
-        <input type="number" class="board-length" placeholder="Eg: 5" min="3", max="100" required=true>
-        <input class="btn btn-sm btn-success px-3 submitBtn" type='submit' value="Submit">
-      </form>
+      <button class="xplayer btn btn-sm btn-success px-2 p-0">X</button>
     </div>
 
     <!-- board display section -->
-    <section class="mt-1 d-flex justify-content-center" style="overflow-x: scroll;">
+    <section class="mt-1 d-flex justify-content-center" style="overflow: auto;">
       <table id="selected-board"></table>
     </section>
 
